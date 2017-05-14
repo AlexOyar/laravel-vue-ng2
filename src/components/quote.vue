@@ -38,8 +38,9 @@
                 this.editing = false;
             },
             onDelete() {
+                const token = localStorage.getItem('token');
                 this.$emit('quoteDeleted', this.qt.id);
-                axios.delete('http://localhost:8000/api/quote/' + this.qt.id)
+                axios.delete('http://localhost:8000/api/quote/' + this.qt.id + '?token=' + token)
                     .then(
                         response => console.log(response)
                     ).catch(
@@ -47,9 +48,10 @@
                 )
             },
             onUpdate() {
+                const token = localStorage.getItem('token');
                 this.editing = false;
                 this.qt.content = this.editValue;
-                axios.put('http://localhost:8000/api/quote/' + this.qt.id,
+                axios.put('http://localhost:8000/api/quote/' + this.qt.id + '?token=' + token,
                     {content: this.editValue})
                     .then(
                         response => console.log(response)

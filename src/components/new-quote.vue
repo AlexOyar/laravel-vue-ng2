@@ -24,7 +24,8 @@
         },
         methods:{
             onSubmitted() {
-                axios.post('http://localhost:8000/api/quote',
+                const token = localStorage.getItem('token');
+                axios.post('http://localhost:8000/api/quote?token=' + token,
                     {content: this.quoteContent})
                     .then(
                         (response) => console.log(response)
